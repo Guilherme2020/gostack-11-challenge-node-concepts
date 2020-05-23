@@ -39,7 +39,7 @@ app.post("/repositories", (request, response) => {
 
   repositories.push(repository);
 
-  return response.json(repositories);
+  return response.json(repository);
 });
 
 app.put("/repositories/:id", (request, response) => {
@@ -93,9 +93,11 @@ app.post("/repositories/:id/like", (request, response) => {
     return response.status(400).json({ error: "Repositorie Not Found" });
   }
 
-  repositories[repositoriesIndex].like += 1;
-
-  return response.json(repositories[repositoriesIndex]);
+  // repositories[repositoriesIndex].likes += 1;
+  const repos = repositories[repositoriesIndex];
+  repos.likes += 1;
+  const likes = repos.likes;
+  return response.json({ likes });
 });
 
 module.exports = app;
